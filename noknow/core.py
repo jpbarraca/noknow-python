@@ -126,7 +126,6 @@ class ZK:
         point: Point = self.curve.decode_point(to_bytes(
             value.signature if isinstance(value, ZKSignature) else value
         ))
-        point.recover()
         return point
 
     def token(self) -> bytes:
@@ -165,7 +164,7 @@ class ZK:
         Construct a proof given the data and secret password used in
         the original signature generation
         """
-        data = to_str(data)
+        
         return ZKData(
             data=data,
             proof=self.create_proof(secret, data),
